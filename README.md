@@ -10,13 +10,13 @@ This application allows users to initiate proceedings against individuals by cap
 - Gradle (Optional, if not using the Gradle wrapper included in the project)
 
 ## Setup and Installation
-1. **Clone the repository:**git clone https://github.com/rasmusvark/proceedings-management
-2. **Navigate to the project directory:**cd proceedings-management
-3. **Start the required services using Docker Compose:**docker-compose up -d
+1. **Clone the repository:** git clone https://github.com/rasmusvark/proceedings-management
+2. **Navigate to the project directory:** cd proceedings-management
+3. **Start the required services using Docker Compose:** docker-compose up -d
 
 ## Running the Application
-1. **Build the application:**./gradlew build
-2. **Run the application:**./gradlew bootRun
+1. **Build the application:** ./gradlew build
+2. **Run the application:** ./gradlew bootRun
 
 ## Accessing the Application
 - The application can be accessed at `http://localhost:8080/api/proceedings`
