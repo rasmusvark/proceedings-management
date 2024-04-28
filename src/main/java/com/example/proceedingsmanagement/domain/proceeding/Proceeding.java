@@ -25,6 +25,7 @@ public class Proceeding {
     private String personalId;
 
     @NotNull
+    @Email(message = "Invalid email format")
     @Column(name = "email", nullable = false)
     private String email;
 
@@ -32,8 +33,6 @@ public class Proceeding {
     @Column(name = "reason", nullable = false)
     private String reason;
 
-    @NotNull
-    @Column(name = "emailSent", nullable = false)
-    @Email(message = "Invalid email format")
+    @Column(name = "emailSent")
     private boolean emailSent;
 }

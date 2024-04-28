@@ -1,6 +1,5 @@
 package com.example.proceedingsmanagement.business.proceeding;
 
-import com.example.proceedingsmanagement.business.rabbit.MessageSender;
 import com.example.proceedingsmanagement.domain.proceeding.Proceeding;
 import jakarta.annotation.Resource;
 import java.util.List;
@@ -14,19 +13,34 @@ public class ProceedingController {
 
     @Resource
     private ProceedingsService proceedingsService;
-    @Resource
-    private MessageSender messageSender;
 
     @PostMapping
     public ResponseEntity<Proceeding> createProceeding(@RequestBody Proceeding proceeding) {
-        Proceeding savedProceeding = proceedingsService.createProceeding(proceeding);
-        messageSender.sendMessage("New proceeding initiated: " + proceeding.getName());
-        return new ResponseEntity<>(savedProceeding, HttpStatus.CREATED);
+        try {
+            Proceeding savedProceeding = proceedingsService.createProceeding(proceeding);
+            return new ResponseEntity<>(savedProceeding, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping
     public ResponseEntity<List<Proceeding>> getAllProceedings() {
-        List<Proceeding> proceedings = proceedingsService.getAllProceedings();
-        return ResponseEntity.ok(proceedings);
+        try {
+            List<Proceeding> proceedings = proceedingsService.getAllProceedings();
+            return new ResponseEntity<>(proceedings, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProceeding(@PathVariable Long id) {
+        try {
+            proceedingsService.deleteProceeding(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

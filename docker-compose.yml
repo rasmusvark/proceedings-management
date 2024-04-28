@@ -7,9 +7,7 @@ services:
       POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
+      
   rabbitmq:
     image: "rabbitmq:3-management"
     environment:
@@ -18,9 +16,3 @@ services:
     ports:
       - "5672:5672" # used by Spring application
       - "15672:15672" # used for management interface
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq
-
-volumes:
-  postgres_data:
-  rabbitmq_data:
